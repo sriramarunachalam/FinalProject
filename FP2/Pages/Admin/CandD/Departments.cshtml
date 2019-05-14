@@ -1,0 +1,46 @@
+﻿@page
+@model FP2.Pages.Admin.CandD.DepartmentsModel
+
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<h1>Departments</h1>
+
+
+
+<div style="overflow-y:scroll;height:150px">
+    <table class="table table-bordered">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Department[0].DepartmentId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Department[0].DepartmentName)
+                </th>
+
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var item in Model.Department)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepartmentName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div style="float:left;margin:10px">
+    <form method="get">
+        <button type="submit" asp-page="AddDepartment" class="btn-lg btn-primary">Add New Department</button>
+    </form>
+</div>
+

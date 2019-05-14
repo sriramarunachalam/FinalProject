@@ -1,0 +1,18 @@
+﻿@page "{id?}"
+@model FP2.Pages.YourCourses.WebAdvisorModel
+@{
+    ViewData["Title"] = "WebAdvisor";
+}
+
+<h1>Web Advisor</h1><hr /><br />
+
+<div >
+    <button class="btn" style="margin-right:20px;border-radius:30px">
+        <a asp-page="CourseRegistration" asp-route-id="@Model.userid" style=";padding-right:20px;color:black;text-decoration:none;font-size:20px">Course Registration</a>
+    </button>    
+
+    <button class="btn" style="margin-right:20px;border-radius:30px">
+        <a asp-page="Grades" asp-route-id="@Model.Student.StudentId" style="color:black;text-decoration:none;font-size:20px">Grades</a>
+    </button>
+</div>
+

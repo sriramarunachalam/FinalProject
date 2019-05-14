@@ -1,0 +1,36 @@
+﻿@page
+@model FP2.Pages.YourCourses.AssignGradeModel
+@{
+    ViewData["Title"] = "AssignGrade";
+}
+
+<form method="post" style="margin-top:50px">
+    <div>
+        <h4>Assign Grade To @Model.Student.FirstName @Model.Student.LastName : </h4>
+    </div>
+    <input type="hidden" asp-for="Enrollment.EnrollmentId" />
+    <div class="form-group">
+        <input asp-for="Enrollment.CourseId" value="@Model.Enrollment.CourseId" class="form-control" />
+        <span asp-validation-for="Enrollment.CourseId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input asp-for="Enrollment.StudentId" value="@Model.Enrollment.StudentId" class="form-control" />
+        <span asp-validation-for="Enrollment.StudentId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input asp-for="Enrollment.Grade" placeholder="Enter Grade" class="form-control" style="width:110px;margin-top:30px" />
+        <span asp-validation-for="Enrollment.Grade" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Assign Grade" class="btn btn-primary" style="margin-top:20px" />
+    </div>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

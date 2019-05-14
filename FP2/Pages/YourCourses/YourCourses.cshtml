@@ -1,0 +1,78 @@
+﻿@page "{id?}"
+@model FP2.Pages.YourCourses.YourCoursesModel
+
+@{
+    ViewData["Title"] = "Your Courses";
+}
+
+<h1>Your Courses</h1><hr /><br /><br />
+
+@if (User.IsInRole("Student"))
+{
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Enrollment[0].Course.CourseId)
+                </th>
+                <th style="width:600px">
+                    @Html.DisplayNameFor(model => model.Enrollment[0].Course.CourseName)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Enrollment)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.CourseId)
+                    </td>
+                    <td style="width:600px">
+                        @Html.DisplayFor(modelItem => item.Course.CourseName)
+                    </td>
+
+                    <td class="text-center"><a asp-page="CoursePage" asp-route-id="@item.CourseId">Go To Course</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+else if(User.IsInRole("Professor"))
+{
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseAssignment[0].Course.CourseId)
+                </th>
+                <th style="width:600px">
+                    @Html.DisplayNameFor(model => model.CourseAssignment[0].Course.CourseName)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.CourseAssignment)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.CourseId)
+                    </td>
+                    <td style="width:600px">
+                        @Html.DisplayFor(modelItem => item.Course.CourseName)
+                    </td>
+
+                    <td class="text-center"><a asp-page="CoursePage" asp-route-id="@item.CourseId">Go To Course</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+

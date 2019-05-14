@@ -1,0 +1,72 @@
+﻿@page "{id?}"
+@model FP2.Pages.YourCourses.CourseRegistrationModel
+
+@{
+    ViewData["Title"] = "Course Registration";
+}
+
+<h3>Course Registration</h3>
+
+<p>Welcome @Model.Student.FirstName @Model.Student.LastName</p>
+
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseAssignment[0].Course.CourseId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseAssignment[0].Course.CourseName)
+            </th>
+            <th style="width:385px">
+                @Html.DisplayNameFor(model => model.CourseAssignment[0].Course.Description)
+            </th>
+            <th>
+                Professor
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseAssignment[0].Course.Credits)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseAssignment[0].Course.Department)
+            </th>
+            <th>Register</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CourseAssignment.Select((value, index) => new { Value = value, Index = index })) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value.Course.CourseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value.Course.CourseName)
+            </td>
+
+            <td style="width:385px">
+                @Html.DisplayFor(modelItem => item.Value.Course.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value.Professor.FirstName) @Html.DisplayFor(modelItem => item.Value.Professor.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value.Course.Credits)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value.Course.Department.DepartmentName)
+            </td>
+            @if (Model.courses.Contains(item.Value.CourseId))
+            {
+                <td>Registered</td>
+            }
+            else
+            {
+                <td>
+                    <a asp-page="Register" asp-route-sid="@Model.Student.StudentId" asp-route-cid="@item.Value.CourseId">Register</a>
+                </td>
+            }
+
+        </tr>
+}
+    </tbody>
+</table>

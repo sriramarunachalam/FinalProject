@@ -1,0 +1,63 @@
+﻿@page "{id?}"
+@model FP2.Pages.Admin.AddUser.ProfessorUsersModel
+@{
+    ViewData["Title"] = "Professor Users";
+}
+
+<h1>Professor Users</h1>
+
+<div style="overflow-y:scroll;height:350px">
+    <table class="table table-bordered">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProfessorUsers[0].UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProfessorUsers[0].Id)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.studentUsers[0].UserName)
+                    </th>*@
+
+                <th>Professor Data - Add/View</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+
+            @foreach (var item in Model.ProfessorUsers.Select((value, index) => new { Value = value, Index = index }))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.Id)
+                    </td>
+
+                    @if (Model.userids.Contains(item.Value.Id))
+                    {
+                        <td>
+                            <a asp-page="ProfessorDataDetails" asp-route-id="@item.Value.Id">View Professor Info</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a asp-page="ProfessorData" asp-route-id="@item.Value.Id">Add Professor Info</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<div>
+    <a asp-page="Users">Back to List</a>
+</div>
+
+
+

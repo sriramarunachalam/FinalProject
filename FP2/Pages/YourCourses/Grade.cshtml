@@ -1,0 +1,11 @@
+﻿@page
+@model FP2.Pages.YourCourses.GradeModel
+@{
+    ViewData["Title"] = "Grade";
+}
+
+<h1>Grade</h1><hr />
+
+<h5>You Grade for @Model.Enrollment.Course.CourseId @Model.Enrollment.Course.CourseName is:  @Model.Enrollment.Grade</h5>
+<br />
+<a asp-page="CoursePage" asp-route-id="@Model.Enrollment.Course.CourseId">Back To Course</a>

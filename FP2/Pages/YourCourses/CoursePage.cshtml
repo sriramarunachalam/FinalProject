@@ -1,0 +1,90 @@
+﻿@page "{id?}"
+@model FP2.Pages.YourCourses.CoursePageModel
+@{
+    ViewData["Title"] = "Course Page";
+}
+
+<h1>@Model.Course.CourseId @Model.Course.CourseName</h1><hr />
+
+@if (User.IsInRole("Professor"))
+{
+    <div style="display:flex;justify-content:flex-start">
+        @*<div style="padding:10px; text-decoration:none">
+            <button class="btn btn-warning" style="color:white;padding:10px;width:100px;font-size:15px">
+                <a asp-page="Media" style="color:black;font-weight:bold">Media</a>
+            </button>
+        </div>*@
+        <div style="padding:10px">
+            <button class="btn btn-warning" style="color:white;padding:10px;width:100px;font-size:15px">
+                <a asp-page="Students" asp-route-id="@Model.Course.CourseId" style="color:black;font-weight:bold">Students</a>
+            </button>
+        </div>
+    </div><hr />
+}
+else if (User.IsInRole("Student"))
+{
+    <div style="display:flex;justify-content:flex-start">
+        @*<div style="padding:10px; text-decoration:none">
+            <button class="btn btn-warning" style="color:white;width:100px;font-size:20px">
+                <a asp-page="Media" style="color:black;font-weight:bold">Media</a>
+            </button>
+        </div>*@
+        <div style="padding:10px">
+            <button class="btn btn-warning" style="color:white;width:100px;font-size:20px">
+                <a asp-page="Students" asp-route-id="@Model.Course.CourseId" style="color:black;font-weight:bold;padding-right:10px">Students</a>
+            </button>
+        </div>
+        <div style="padding:10px">
+            <button class="btn btn-warning" style="color:white;width:100px;font-size:20px">
+                <a asp-page="Grade" asp-route-sid="@Model.Student.StudentId" asp-route-cid="@Model.Course.CourseId"  style="color:black;font-weight:bold">Grade</a>
+            </button>
+        </div>
+    </div><hr />
+}
+
+
+
+@if (User.IsInRole("Professor"))
+{
+    <h4>Announcements</h4><hr />
+    <a asp-page="CreateAnnouncement" asp-route-cid="@Model.Course.CourseId" asp-route-pid="@Model.Professor.ProfessorId">Create Announcement</a>
+    <br /><hr />
+    <div>
+        @foreach (var item in Model.Announcements)
+        {
+            <ul>
+                <li>
+                    <p>@item.Date</p>
+                    <p>@item.Announcement1</p>
+
+                </li>
+            </ul>
+        }
+    </div>
+}
+else if (User.IsInRole("Student"))
+{
+    <h4>Announcements</h4>
+    <hr />
+    <div>
+        @foreach (var item in Model.Announcements)
+        {
+            <ul>
+                <li>
+                    <p>@item.Date</p>
+                    <p>@item.Announcement1</p>
+                    <hr />
+                </li>
+            </ul>
+        }
+    </div>
+}
+
+@if (User.IsInRole("Professor"))
+{
+    <a asp-page="YourCourses" asp-route-id="@Model.Professor.ProfessorId">Back to your Courses</a>
+}
+else if (User.IsInRole("Student"))
+{
+    <a asp-page="YourCourses" asp-route-id="@Model.Student.StudentId">Back to your Courses</a>
+}

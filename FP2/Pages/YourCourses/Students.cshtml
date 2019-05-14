@@ -1,0 +1,66 @@
+﻿@page
+@model FP2.Pages.YourCourses.StudentsModel
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<h1>Students</h1><br /><hr />
+
+<table class="table table-bordered col-md-6">
+    <thead class="thead-dark text-center">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Enrollment[0].Student)
+            </th>
+            @if (User.IsInRole("Professor"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Enrollment[0].Grade)
+                </th>
+            }
+            else if (User.IsInRole("Student"))
+            {
+                <th>
+                    Email
+                </th>
+            }
+
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @foreach (var item in Model.Enrollment.Select((value, index) => new { Value = value, Index = index }))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Value.Student.FirstName) @Html.DisplayFor(modelItem => item.Value.Student.LastName)
+                </td>
+                @if (User.IsInRole("Professor"))
+                {
+                    @if (item.Value.Grade == null)
+                    {
+                        <td>
+                            <button class="btn-warning"><a asp-page="AssignGrade" asp-route-sid="@item.Value.Student.StudentId" asp-route-cid="@item.Value.Course.CourseId" style="color:black">Assign Grade</a></button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Value.Grade)
+                        </td>
+                    }
+                }
+                else if (User.IsInRole("Student"))
+                {
+                    <td>
+                        @Model.emailstest[item.Index]
+                    </td>
+                }
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button class="btn"><a asp-page="CoursePage" asp-route-id="@Model.Course.CourseId" style="color:black;text-decoration:none">Back To Course</a></button>

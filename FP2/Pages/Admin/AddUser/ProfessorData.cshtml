@@ -1,0 +1,53 @@
+﻿@page "{id?}"
+@model FP2.Pages.Admin.AddUser.ProfessorDataModel
+
+@{
+    ViewData["Title"] = "Professor Data";
+}
+
+<h1>Professor Data</h1>
+
+<h4>Professor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Professor.FirstName" class="control-label"></label>
+                <input asp-for="Professor.FirstName" class="form-control" />
+                <span asp-validation-for="Professor.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Professor.LastName" class="control-label"></label>
+                <input asp-for="Professor.LastName" class="form-control" />
+                <span asp-validation-for="Professor.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Professor.UserId" class="control-label"></label>
+                <input asp-for="Professor.UserId" class="form-control" value="@Model.user" />
+                <span asp-validation-for="Professor.UserId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Professor.DepartmentId" class="control-label"></label>
+                <select asp-for="Professor.DepartmentId" class="form-control"
+                        asp-items="@Model.Departments">
+                    <option value="">-- Select Department --</option>
+                </select>
+                <span asp-validation-for="Professor.DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="ProfessorUsers">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

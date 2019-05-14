@@ -1,0 +1,70 @@
+﻿@page "{id?}"
+@model FP2.Pages.Admin.AddUser.ProfessorsInfoModel
+
+@{
+    ViewData["Title"] = "ProfessorsInfo";
+}
+
+<h1>Professors Info</h1>
+
+<div style="overflow-y:scroll;height:300px">
+    <table class="table table-bordered">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Professor[0].FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Professor[0].LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Professor[0].Department)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Professor[0].ProfessorId)
+                </th>
+                <th>
+                    Assigned Course
+                </th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var item in Model.Professor.Select((value, index) => new { Value = value, Index = index }))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.Department.DepartmentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Value.ProfessorId)
+                    </td>
+                    @if (Model.professorids.Contains(item.Value.ProfessorId))
+                    {
+                        <td>
+                            <a asp-page="CourseAssignment" asp-route-id="@item.Value.ProfessorId">Edit Assigned Courses</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a asp-page="CourseAssignment" asp-route-id="@item.Value.ProfessorId">Assign Courses</a>
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<div>
+    <a asp-page="Users">Back to List</a>
+</div>
+

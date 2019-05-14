@@ -1,0 +1,29 @@
+﻿@page "{id?}"
+@model FP2.Pages.YourCourses.RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Confirm Registeration</h1>
+
+<hr />
+<p>@Model.Student.FirstName, Are You Sure You Want To Register For @Model.Course.CourseId @Model.Course.CourseName?</p>
+<div class="row">
+    
+    <div class="col-md-4">
+        <form method="post" asp-route-id="@Model.Student.UserId" asp-route-sid="@Model.Student.StudentId" asp-route-cid="@Model.Course.CourseId">
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="CourseRegistration" asp-route-id="@Model.Student.UserId">Back to Courses</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

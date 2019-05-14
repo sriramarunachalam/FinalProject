@@ -1,0 +1,29 @@
+﻿@page
+@model FP2.Pages.YourCourses.CreateAnnouncementModel
+@{
+    ViewData["Title"] = "CreateAnnouncement";
+}
+
+<h1>Create Announcement</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Announcement.CourseId" class="control-label"></label>
+        <input asp-for="Announcement.CourseId" value="@Model.Course.CourseId" class="form-control" />
+        <span asp-validation-for="Announcement.CourseId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Announcement.ProfessorId" class="control-label"></label>
+        <input asp-for="Announcement.ProfessorId" value="@Model.Professor.ProfessorId" class="form-control" />
+        <span asp-validation-for="Announcement.ProfessorId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Announcement.Announcement1" class="control-label"></label>
+        <textarea asp-for="Announcement.Announcement1" class="form-control"></textarea>
+        <span asp-validation-for="Announcement.Announcement1" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create Announcement" class="btn btn-primary" />
+    </div>
+</form>
+

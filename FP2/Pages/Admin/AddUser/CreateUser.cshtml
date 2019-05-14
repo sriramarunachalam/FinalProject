@@ -1,0 +1,50 @@
+﻿@page
+@model FP2.Pages.Admin.AddUser.CreateUserModel
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<h1>Create User</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UInfo.Email" class="control-label"></label>
+                <input asp-for="UInfo.Email" class="form-control" />
+                <span asp-validation-for="UInfo.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UInfo.Password"></label>
+                <input type="password" asp-for="UInfo.Password" class="form-control" />
+                <span asp-validation-for="UInfo.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UInfo.ConfirmPassword"></label>
+                <input type="password" asp-for="UInfo.ConfirmPassword" class="form-control" />
+                <span asp-validation-for="UInfo.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @foreach (var item in Model.RolesList)
+                {
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="RoleId" value="@item.RoleId" /> @item.RoleName<br />
+                        </label>
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add User" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-page="./Users">Back to List</a>
+</div>
+
+@section Scripts { @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} }
+
+

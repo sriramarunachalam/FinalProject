@@ -1,0 +1,41 @@
+﻿@page "{id?}"
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (User.IsInRole("Student"))
+{
+    <div>
+        <h3>Welcome @Model.Student.FirstName @Model.Student.LastName</h3>
+    </div>
+}
+else if (User.IsInRole("Professor"))
+{
+    <div>
+        <h3>Welcome Professor @Model.Professor.FirstName @Model.Professor.LastName</h3>
+    </div>
+}
+
+    <div style="margin-top:200px;margin-left:100px">
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.IsInRole("Student"))
+            {
+                <a asp-page="/YourCourses/YourCourses" asp-route-id="@Model.Student.StudentId" style="padding-right:50px"><img src="~/your_courses.png" style="height:300px;width:400px"></a>
+                //<a asp-page="/YourCourses/CourseRegistration" asp-route-id="@Model.userid"><img src="~/course_registration.jpg" style="height:300px;width:400px"></a>
+                <a asp-page="/YourCourses/WebAdvisor" asp-route-id="@Model.userid"><img src="~/webadvisor1.png" style="height:300px;width:400px"></a>
+            }
+            else if (User.IsInRole("Professor"))
+            {
+                <a asp-page="/YourCourses/YourCourses" asp-route-id="@Model.Professor.ProfessorId" style="margin-left:200px;margin-top:100px"><img src="~/your_courses.png" style="height:300px;width:400px"></a>
+            }
+
+        }
+
+    </div>
+
+@*<div>
+        <a asp-page="/YourCourses/YourCourses" asp-route-id="@Model.userid">Your COurses</a>
+    </div>*@
+

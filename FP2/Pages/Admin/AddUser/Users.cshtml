@@ -1,0 +1,70 @@
+﻿@page
+@model FP2.Pages.Admin.AddUser.UsersModel
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<h2>All Users</h2>
+
+
+
+<div style="overflow-y:scroll;height:500px">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserList[0].UserName)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.UserList[0].Email)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.UserList)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <div style="float:left;margin:10px">
+        <form method="get">
+            <button type="submit" asp-page="CreateUser" class="btn-lg btn-primary">Create New User</button>
+        </form>
+    </div>
+    <div style="float:left; margin:10px">
+        <form method="get">
+            <button type="submit" asp-page="StudentUsers" class="btn-lg btn-danger">Student Users</button>
+        </form>
+        <br /> <br /> <br />
+    </div>
+    <div style="float:left; margin:10px">
+        <form method="get">
+            <button type="submit" asp-page="ProfessorUsers" class="btn-lg btn-danger">Professor Users</button>
+        </form>
+    </div>
+    <div style="float:left; margin:10px">
+        <form method="get">
+            <button type="submit" asp-page="StudentsInfo" class="btn-lg btn-danger">Students List</button>
+        </form>
+    </div>
+    <div style="float:left; margin:10px">
+        <form method="get">
+            <button type="submit" asp-page="ProfessorsInfo" class="btn-lg btn-danger">Professors List</button>
+        </form>
+    </div>
+</div>
+
